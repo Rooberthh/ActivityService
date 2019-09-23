@@ -11,9 +11,23 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+    use Carbon\Carbon;
+
+    $factory->define('App\Activity', function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'email' => $faker->email,
+        'startDate' => $faker->dateTime,
+        'endDate' => $faker->dateTime,
+        'category_id' => 1
+//        'category_id' => function() {
+//            return factory('App\Category')->create()->id;
+//        }
+    ];
+});
+
+$factory->define('App\Category', function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'color' => '#000000'
     ];
 });
