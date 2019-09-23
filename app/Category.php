@@ -10,4 +10,9 @@
             'name',
             'color'
         ];
+
+        public function Activities()
+        {
+            return $this->hasMany(Activity::class);
+        }
     }

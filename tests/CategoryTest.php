@@ -14,4 +14,13 @@
 
             $this->assertEquals('Cat', $category->name);
         }
+
+        /** @test */
+        function a_category_contains_activities()
+        {
+            $category = create('App\Category');
+            $activity = create('App\Activity', ['category_id' => $category->id]);
+
+            $this->assertTrue($category->activities->contains($activity));
+        }
     }
