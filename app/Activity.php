@@ -10,12 +10,13 @@
             'name', 'startDate', 'endDate', 'category_id'
         ];
 
-        protected $hidden = [
-            'password',
-        ];
-
         public function category()
         {
             return $this->belongsTo(Category::class);
+        }
+
+        public function path()
+        {
+            return "/api/activities/{$this->id}";
         }
     }

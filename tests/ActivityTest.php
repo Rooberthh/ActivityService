@@ -1,11 +1,57 @@
 <?php
 
+    use App\Activity;
     use Carbon\Carbon;
     use Laravel\Lumen\Testing\DatabaseMigrations;
 
 class ActivityTest extends TestCase
 {
     use DatabaseMigrations;
+
+    /** @test */
+    function a_user_can_fetch_activities()
+    {
+        create('App\Activity', [], 10);
+
+        $this->json('get', 'api/activities')->assertResponseStatus(200);
+    }
+
+    /** @test */
+    function a_user_can_create_activities()
+    {
+        $activity = make('App\Activity');
+
+        $this->json('post', 'api/activities', $activity->toArray())
+            ->assertResponseStatus(201);
+
+        $this->seeInDatabase('activities', $activity->toArray());
+    }
+
+    /** @test */
+    function a_user_can_delete_activities()
+    {
+        create('App\Activity', [], 10);
+
+        $activity = Activity::all()->first();
+
+        $this->json('delete', $activity->path())
+            ->assertResponseStatus(204);
+    }
+
+    /** @test */
+    function a_user_can_update_activities()
+    {
+        $activity = create('App\Activity');
+
+        $this->json('patch', $activity->path(), [
+            'name' => 'is changed',
+            'startDate' => $activity->startDate,
+            'endDate' => $activity->endDate,
+            'category_id' => $activity->category->id
+        ])->assertResponseStatus(200);
+
+        $this->assertEquals('is changed', $activity->fresh()->name);
+    }
 
     /** @test */
     public function a_activity_has_a_name()

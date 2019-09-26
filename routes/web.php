@@ -14,3 +14,10 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('activities',  ['uses' => 'ActivityController@index']);
+    $router->post('activities',  ['uses' => 'ActivityController@store']);
+    $router->delete('activities/{id}',  ['uses' => 'ActivityController@destroy']);
+    $router->patch('activities/{id}',  ['uses' => 'ActivityController@update']);
+});

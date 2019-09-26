@@ -11,11 +11,13 @@
 |
 */
 
+    use Carbon\Carbon;
+
     $factory->define('App\Activity', function (Faker\Generator $faker) {
         return [
-            'name' => $faker->name,
-            'startDate' => $faker->dateTime,
-            'endDate' => $faker->dateTime,
+            'name' => $faker->unique()->name,
+            'startDate' => Carbon::now()->format('Y-m-d H:i:s'),
+            'endDate' => Carbon::now()->format('Y-m-d H:i:s'),
             'category_id' => function() {
                 return factory('App\Category')->create()->id;
             }
@@ -24,7 +26,7 @@
 
     $factory->define('App\Category', function (Faker\Generator $faker) {
         return [
-            'name' => $faker->word,
+            'name' => $faker->unique()->word,
             'color' => '#000000'
         ];
     });
