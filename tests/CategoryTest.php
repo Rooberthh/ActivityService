@@ -8,6 +8,17 @@
         use DatabaseMigrations;
 
         /** @test */
+        function a_user_can_fetch_categories()
+        {
+             $categories = create('App\Category', [], 10);
+
+             $response = $this->json('get', 'api/category');
+
+             $response->assertResponseStatus(200);
+             $response->seeJsonEquals($categories->toArray());
+        }
+
+        /** @test */
         public function a_category_has_a_name()
         {
             $category = create('App\Category', ['name' => 'Cat']);

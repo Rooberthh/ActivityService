@@ -4,6 +4,9 @@
     
     use App\Activity;
     use Illuminate\Http\Request;
+    use Illuminate\Http\Response;
+    use Illuminate\Validation\ValidationException;
+    use Laravel\Lumen\Http\ResponseFactory;
 
     class ActivityController extends Controller
     {
@@ -12,6 +15,11 @@
             return Activity::all();
         }
 
+        /**
+         * @param Request $request
+         * @return Response|ResponseFactory
+         * @throws ValidationException
+         */
         public function store(Request $request)
         {
             $this->validate($request, [
@@ -26,6 +34,10 @@
             return response($activity, 201);
         }
 
+        /**
+         * @param $id
+         * @return Response|ResponseFactory
+         */
         public function destroy($id)
         {
             $activity = Activity::find($id);
@@ -34,6 +46,12 @@
             return response("Activity has been deleted", 204);
         }
 
+        /**
+         * @param Request $request
+         * @param $id
+         * @return Response|ResponseFactory
+         * @throws ValidationException
+         */
         public function update(Request $request, $id)
         {
             $this->validate($request, [

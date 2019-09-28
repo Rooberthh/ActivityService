@@ -20,4 +20,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('activities',  ['uses' => 'ActivityController@store']);
     $router->delete('activities/{id}',  ['uses' => 'ActivityController@destroy']);
     $router->patch('activities/{id}',  ['uses' => 'ActivityController@update']);
+
+    $router->get('category',  ['uses' => 'CategoryController@index']);
 });
