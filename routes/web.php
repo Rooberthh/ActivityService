@@ -22,4 +22,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->patch('activities/{id}',  ['uses' => 'ActivityController@update']);
 
     $router->get('category',  ['uses' => 'CategoryController@index']);
+
+    $router->get('timetable',  ['uses' => 'TimetableController@index']);
+    $router->post('timetable',  ['uses' => 'TimetableController@store']);
 });

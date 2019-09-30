@@ -15,4 +15,15 @@
 
             $this->assertTrue($timetable->activities->contains($activity));
         }
+
+        /** @test */
+        function a_user_can_create_timetables()
+        {
+            $timetable = make('App\Timetable');
+
+            $response = $this->json('post', $timetable->path(), $timetable->toArray());
+
+            $response->assertResponseStatus(201);
+            $this->seeInDatabase('timetables', $timetable->toArray());
+        }
     }

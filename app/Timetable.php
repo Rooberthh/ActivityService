@@ -19,4 +19,9 @@
             return $this->hasMany(Activity::class);
         }
 
+        public function path()
+        {
+            return "/api/timetable/{$this->id}";
+        }
+
     }
