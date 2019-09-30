@@ -1,18 +1,22 @@
 <?php
 
-    namespace App;
 
+    namespace App;
     use Illuminate\Database\Eloquent\Model;
 
-    class Category extends Model
+    class Timetable extends Model
     {
         protected $fillable = [
             'name',
             'color'
         ];
 
+        /**
+         * @return mixed
+         */
         public function activities()
         {
             return $this->hasMany(Activity::class);
         }
+
     }

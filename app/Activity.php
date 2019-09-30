@@ -7,8 +7,13 @@
     class Activity extends Model
     {
         protected $fillable = [
-            'name', 'startDate', 'endDate', 'category_id'
+            'name', 'startDate', 'endDate', 'category_id', 'timetable_id'
         ];
+
+        public function timetable()
+        {
+            return $this->belongsTo(Timetable::class);
+        }
 
         public function category()
         {
