@@ -16,17 +16,6 @@
         }
 
         /** @test */
-        function a_user_can_create_timetables()
-        {
-            $timetable = make('App\Timetable');
-
-            $response = $this->json('post', $timetable->path(), $timetable->toArray());
-
-            $response->assertResponseStatus(201);
-            $this->seeInDatabase('timetables', $timetable->toArray());
-        }
-
-        /** @test */
         function a_user_can_fetch_timetables()
         {
             $activities = create('App\Timetable', [], 10);
