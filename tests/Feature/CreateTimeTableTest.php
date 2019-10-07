@@ -28,4 +28,16 @@
             $response->assertResponseStatus(200);
             $response->assertEquals('is changed', $timetable->fresh()->name);
         }
+
+        /** @test */
+        function a_timetable_can_add_activities()
+        {
+            $timetable = create('App\Timetable');
+
+            $activity = make('App\Activity');
+
+            $timetable->addActivity($activity->toArray());
+
+            $this->assertCount(1, $timetable->activities);
+        }
     }

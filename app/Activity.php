@@ -22,6 +22,6 @@
 
         public function path()
         {
-            return "/api/activities/{$this->id}";
+            return "/api/timetables/{$this->category->id}/{$this->timetable->id}";
         }
     }

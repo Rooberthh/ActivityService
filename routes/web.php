@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('activities',  ['uses' => 'ActivityController@index']);
-    $router->post('activities',  ['uses' => 'ActivityController@store']);
+    $router->post('timetables/{category}/{timetable}/activities',  ['uses' => 'ActivityController@store']);
     $router->delete('activities/{id}',  ['uses' => 'ActivityController@destroy']);
     $router->patch('activities/{id}',  ['uses' => 'ActivityController@update']);
 

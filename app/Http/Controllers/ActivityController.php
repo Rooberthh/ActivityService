@@ -3,6 +3,7 @@
     namespace App\Http\Controllers;
     
     use App\Activity;
+    use App\Timetable;
     use Illuminate\Http\Request;
     use Illuminate\Http\Response;
     use Illuminate\Validation\ValidationException;
@@ -17,11 +18,15 @@
 
         /**
          * @param Request $request
+         * @param $category
+         * @param $timetable
          * @return Response|ResponseFactory
          * @throws ValidationException
          */
-        public function store(Request $request)
+        public function store(Request $request, $category, $timetable)
         {
+            $timetable = Timetable::find($timetable);
+
             $this->validate($request, [
                 'name' => 'required',
                 'startDate' => 'required',
@@ -29,7 +34,12 @@
                 'category_id' => 'required'
             ]);
 
-            $activity = Activity::create($request->all());
+            $activity = $timetable->addActivity([
+                'name' => $request->get('name'),
+                'startDate' => $request->get('startDate'),
+                'endDate' => $request->get('endDate'),
+                'category_id' => $category
+            ]);
 
             return response($activity, 201);
         }
@@ -41,8 +51,8 @@
         public function destroy($id)
         {
             $activity = Activity::find($id);
-            $activity->delete();
 
+            $activity->delete();
             return response("Activity has been deleted", 204);
         }
 

@@ -21,10 +21,10 @@
         {
             $activity = make('App\Activity');
 
-            $this->json('post', 'api/activities', $activity->toArray())
+            $this->json('post', $activity->path() . '/activities', $activity->toArray())
                 ->assertResponseStatus(201);
 
-            $this->seeInDatabase('activities', $activity->toArray());
+            $this->seeInDatabase('activities', ['name' => $activity->name]);
         }
 
         /** @test */
@@ -34,7 +34,7 @@
 
             $activity = Activity::all()->first();
 
-            $this->json('delete', $activity->path())
+            $this->json('delete', "/api/activities/{$activity->id}")
                 ->assertResponseStatus(204);
         }
 
@@ -43,7 +43,7 @@
         {
             $activity = create('App\Activity');
 
-            $this->json('patch', $activity->path(), [
+            $this->json('patch', "/api/activities/{$activity->id}", [
                 'name' => 'is changed',
                 'startDate' => $activity->startDate,
                 'endDate' => $activity->endDate,

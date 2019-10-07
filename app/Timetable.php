@@ -19,6 +19,17 @@
             return $this->hasMany(Activity::class);
         }
 
+        /**
+         * @param $activity
+         * @return Activity
+         */
+        public function addActivity($activity)
+        {
+            $activity = $this->activities()->create($activity);
+
+            return $activity;
+        }
+
         public function path()
         {
             return "/api/timetable/{$this->id}";
