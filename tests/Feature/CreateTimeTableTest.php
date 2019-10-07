@@ -17,4 +17,15 @@
             $response->assertResponseStatus(201);
             $this->seeInDatabase('timetables', $timetable->toArray());
         }
+
+        /** @test */
+        function a_user_can_update_timetables()
+        {
+            $timetable = create('App\Timetable');
+
+            $response = $this->json('patch', $timetable->path(), ['name' => 'is changed']);
+
+            $response->assertResponseStatus(200);
+            $response->assertEquals('is changed', $timetable->fresh()->name);
+        }
     }

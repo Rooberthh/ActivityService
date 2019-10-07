@@ -25,4 +25,5 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('timetable',  ['uses' => 'TimetableController@index']);
     $router->post('timetable',  ['uses' => 'TimetableController@store']);
+    $router->patch('timetable/{id}',  ['uses' => 'TimetableController@update']);
 });

@@ -25,4 +25,17 @@
             return response($Timetable, 201);
         }
 
+        public function update(Request $request, $id)
+        {
+            $this->validate($request, [
+                'name' => 'sometimes',
+            ]);
+
+            $Timetable = Timetable::find($id);
+
+            $Timetable->update(['name' => $request->get('name')]);
+
+            return response($Timetable, 200);
+        }
+
     }
