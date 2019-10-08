@@ -32,7 +32,7 @@
 
         public function path()
         {
-            return "/api/timetable/{$this->id}";
+            return "/api/timetables/{$this->id}";
         }
 
     }

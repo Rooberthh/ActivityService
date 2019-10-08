@@ -20,7 +20,7 @@
         {
             $activities = create('App\Timetable', [], 10);
 
-            $response = $this->json('get', 'api/timetable');
+            $response = $this->json('get', 'api/timetables');
 
             $response->assertResponseStatus(200);
             $response->seeJsonEquals($activities->toArray());
